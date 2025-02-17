@@ -1,15 +1,19 @@
 import 'package:get/get.dart';
 
-class ExamController extends GetxController{
-  final RxBool isCheked=false.obs;
-  final RxBool isCheked1=false.obs;
-  final RxBool isCheked2=false.obs;
-  final RxBool isCheked3=false.obs;
-  final RxBool isCheked4=false.obs;
-  final RxBool isCheked5=false.obs;
-  final RxBool isCheked6=false.obs;
-  final RxBool isCheked7=false.obs;
-  final RxBool isCheked8=false.obs;
 
+class ExamController extends GetxController{
+   
+    RxBool isCheked=false.obs;
+    RxBool isCheked1=false.obs;
+    RxInt selectedIndex=0.obs;
+   final RxInt selectedIndex1=0.obs;
+
+   void selectedAnswer(int index){
+    if(selectedIndex==index){
+      isCheked=true.obs;
+    }
+   }
+
+   
 
 }
