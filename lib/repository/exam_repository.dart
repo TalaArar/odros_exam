@@ -16,17 +16,21 @@ class ExamRepository{
       'Content-Type': 'application/json'
     };
     var request = http.Request('POST', Uri.parse('${ApiUrls.api}/CreateExam'));
-    request.body = json.encode({
-      "LEVEL_SER": 265,
-      "ITEM_SER": 248,
-      "EXAM_CATEGORY_NO": 1,
-      "EXAM_QUESTION_TEXT": "do you what  ?",
-      "ANSWER_ONE": "3",
-      "ANSWER_TWO": "6",
-      "ANSWER_THREE": "2",
-      "ANSWER_FOUR": "4",
-      "ANSWER_IS_CORRECT": "3"
-    });
+    request.body = json.encode(   [
+  {
+    "EXAM_ID": 0,
+    "LEVEL_SER": 0,
+    "ITEM_SER": 0,
+    "EXAM_CATEGORY_NO": 0,
+    "ANSWER_ID": 0,
+    "EXAM_QUESTION_TEXT": "string",
+    "ANSWER_ONE": "string",
+    "ANSWER_TWO": "string",
+    "ANSWER_THREE": "string",
+    "ANSWER_FOUR": "string",
+    "ANSWER_IS_CORRECT": "string"
+  }
+]);
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
@@ -61,8 +65,8 @@ class ExamRepository{
   }
 
   Future<GetlevelsModel> getlevels(educationtype)async{
-    var request = http.Request('GET', Uri.parse('${ApiUrls.api}/GetLevels?EDUCTION_TYPE=$educationtype'));
 
+    var request = http.Request('GET', Uri.parse('${ApiUrls.api}/GetLevels?EDUCTION_TYPE=$educationtype'));
 
     http.StreamedResponse response = await request.send();
   String res=await response.stream.bytesToString();
