@@ -68,8 +68,13 @@ body
   }
 
   Future<GetlevelsModel> getlevels(educationtype)async{
-
+    var headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
+    };
     var request = http.Request('GET', Uri.parse('${ApiUrls.api}/GetLevels?EDUCTION_TYPE=$educationtype'));
+    request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
   String res=await response.stream.bytesToString();

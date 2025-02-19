@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutterweb_priv/binding/exam_binding.dart';
-import 'package:flutterweb_priv/helper/route/routes.dart';
 import 'package:flutterweb_priv/utils/colors.dart';
 import 'package:flutterweb_priv/view/create_exam_view.dart';
 import 'package:get/get.dart';
@@ -27,7 +25,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return GetMaterialApp(
-
       title: 'ادرس خصوصي امتحانات',
       theme: ThemeData(
         primaryColor: AppColors.darkBlue,

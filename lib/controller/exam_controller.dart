@@ -15,8 +15,10 @@ class ExamController extends GetxController{
     RxInt selectedIndex=(-1).obs;
     RxInt selectedIndex1=(-1).obs;
     int selectedEducationType=0;
-
-
+    String? selectedLevelValue;
+    String? selectedItemsValue;
+    String? selectedUnitValue;
+    String? selectedSubjectValue;
      List<levelPayload> level =[];
      List<GetItemsPayload> item =[];
      List<String> levelList =[];
@@ -27,11 +29,10 @@ class ExamController extends GetxController{
      String? chooseSubject;
      String? chooseUnit;
      List<String>? correct=[];
-     
+     int length=1;
      final List< TextEditingController>? question1=[TextEditingController(),TextEditingController()];
       final List<TextEditingController> answer1= [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController()];
-     final List<TextEditingController> answer2= [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController()];
-     
+
 
      void fetchlevel()async{
       update();
@@ -39,9 +40,8 @@ class ExamController extends GetxController{
             level=value.payload??[];
           for (var element in level) {
           levelList.add(element.levelName!);
+          log(levelList.toList().toString());
           }
-          
-            
 
       });
       update();
@@ -114,13 +114,17 @@ class ExamController extends GetxController{
 
    @override
   void onInit() {
-  //  fetchlevel();
-  //  fetchItem();
+   fetchlevel();
+   fetchItem();
     super.onInit();
   }
 
    
-
+   addindex(){
+     update();
+     length=length+1;
+     update;
+   }
    
 
 }
