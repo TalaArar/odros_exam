@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class ExamController extends GetxController{
      final List<TextEditingController> answer2= [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController()];
      
 
-     fetchlevel()async{
+     void fetchlevel()async{
       update();
       await ExamRepository().getlevels(0).then((value){
             level=value.payload??[];
@@ -45,7 +46,7 @@ class ExamController extends GetxController{
       });
       update();
      }
-     fetchItem()async{
+     void fetchItem()async{
       update();
       await ExamRepository().getItems().then((value){
             item=value.payload??[];
@@ -90,34 +91,31 @@ class ExamController extends GetxController{
       'الدرس الخامس عشر',
     ];
 
-    createExam()async{
-      await ExamRepository().CreateExam().then((value) {
-        Map<String,dynamic> body={
-           
+   void createExam()async{
+      Map<String,dynamic> body={
+              
     "EXAM_ID": 0,
     "LEVEL_SER": 0,
     "ITEM_SER": 0,
     "EXAM_CATEGORY_NO": 0,
     "ANSWER_ID": 0,
-    "EXAM_QUESTION_TEXT": question1![0],
+     "EXAM_QUESTION_TEXT": question1![0].text,
     "ANSWER_ONE": answer1[0].text,
     "ANSWER_TWO": answer1[1].text,
     "ANSWER_THREE": answer1[2].text,
     "ANSWER_FOUR": answer1[3].text,
-    "ANSWER_IS_CORRECT": correct![0]
-  
-        };
-        return body;
+    
+    
+      };
       
-      });
-      
+      log(body.toString());
 
     }
 
    @override
   void onInit() {
-   fetchlevel();
-   fetchItem();
+  //  fetchlevel();
+  //  fetchItem();
     super.onInit();
   }
 
