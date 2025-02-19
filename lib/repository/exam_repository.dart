@@ -11,26 +11,29 @@ import '../helper/apiUrl.dart';
 
 
 class ExamRepository{
-  Future<CreateExamModel> CreateExam()async{
+  Future<CreateExamModel> CreateExam(Map<String,dynamic> body)async{
     var headers = {
       'Content-Type': 'application/json'
     };
     var request = http.Request('POST', Uri.parse('${ApiUrls.api}/CreateExam'));
-    request.body = json.encode(   [
-  {
-    "EXAM_ID": 0,
-    "LEVEL_SER": 0,
-    "ITEM_SER": 0,
-    "EXAM_CATEGORY_NO": 0,
-    "ANSWER_ID": 0,
-    "EXAM_QUESTION_TEXT": "string",
-    "ANSWER_ONE": "string",
-    "ANSWER_TWO": "string",
-    "ANSWER_THREE": "string",
-    "ANSWER_FOUR": "string",
-    "ANSWER_IS_CORRECT": "string"
-  }
-]);
+    request.body = json.encode(  
+// [
+//   {
+//     "EXAM_ID": 0,
+//     "LEVEL_SER": 0,
+//     "ITEM_SER": 0,
+//     "EXAM_CATEGORY_NO": 0,
+//     "ANSWER_ID": 0,
+//     "EXAM_QUESTION_TEXT": "string",
+//     "ANSWER_ONE": "string",
+//     "ANSWER_TWO": "string",
+//     "ANSWER_THREE": "string",
+//     "ANSWER_FOUR": "string",
+//     "ANSWER_IS_CORRECT": "string"
+//   }
+// ]
+body
+);
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
