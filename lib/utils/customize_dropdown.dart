@@ -31,6 +31,7 @@ class _CustomizeDropdownWidgetState extends State<CustomizeDropdownWidget> {
           border: Border.all(color: Colors.grey, width: 2)),
       child: DropdownButtonHideUnderline(
         child: DropdownButton2<String>(
+          value:widget.value! ,
           isExpanded: true,
           hint: widget.hint,
 

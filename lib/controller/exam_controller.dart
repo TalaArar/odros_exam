@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutterweb_priv/model/add_question_model.dart';
 import 'package:flutterweb_priv/model/createexam_model.dart';
 import 'package:flutterweb_priv/model/item_model.dart';
 import 'package:flutterweb_priv/model/level_model.dart';
@@ -10,8 +11,7 @@ import 'package:get/get.dart';
 
 
 class ExamController extends GetxController{
-   
-    
+
     RxInt selectedIndex=(-1).obs;
     RxInt selectedIndex1=(-1).obs;
     int selectedEducationType=0;
@@ -19,6 +19,10 @@ class ExamController extends GetxController{
     String? selectedItemsValue;
     String? selectedUnitValue;
     String? selectedSubjectValue;
+    int? selectedLevelid;
+    int? selectedItemsid;
+    int? selectedUnitid;
+    int? selectedSubjectid;
      List<levelPayload> level =[];
      List<GetItemsPayload> item =[];
      List<String> levelList =[];
@@ -30,9 +34,9 @@ class ExamController extends GetxController{
      String? chooseUnit;
      List<String>? correct=[];
      int length=1;
-     final List< TextEditingController>? question1=[TextEditingController(),TextEditingController()];
-      final List<TextEditingController> answer1= [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController()];
-
+      List<TextEditingController> question=[];
+      List<TextEditingController> answer= [];
+      String? isSelected;
 
      void fetchlevel()async{
       update();
@@ -91,27 +95,8 @@ class ExamController extends GetxController{
       'الدرس الخامس عشر',
     ];
 
-   void createExam()async{
-      Map<String,dynamic> body={
-              
-    "EXAM_ID": 0,
-    "LEVEL_SER": 0,
-    "ITEM_SER": 0,
-    "EXAM_CATEGORY_NO": 0,
-    "ANSWER_ID": 0,
-     "EXAM_QUESTION_TEXT": question1![0].text,
-    "ANSWER_ONE": answer1[0].text,
-    "ANSWER_TWO": answer1[1].text,
-    "ANSWER_THREE": answer1[2].text,
-    "ANSWER_FOUR": answer1[3].text,
-    
-    
-      };
-      
-      log(body.toString());
-
-    }
-
+List<AddExamModel> addexam=[];
+List<exam> examlist=[];
    @override
   void onInit() {
    fetchlevel();
@@ -125,6 +110,21 @@ class ExamController extends GetxController{
      length=length+1;
      update;
    }
-   
+
+}
+
+class exam{
+  String? question;
+  answer? answers;
+  exam(this.question,this.answers);
+}
+
+class answer{
+  String? answerone;
+  String? answertwo;
+  String? answerthree;
+  String? answerfour;
+  String? answercorrect;
+  answer(this.answerone,this.answertwo,this.answerthree,this.answerfour,this.answercorrect);
 
 }
