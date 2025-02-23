@@ -28,7 +28,7 @@ class _ViewAllExamsScreenState extends State<ViewAllExamsScreen> {
                   itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 15),
-                    child: Container(
+                    child: SizedBox(
                       width: Get.width,
                       height: Get.height*0.2,
                       child: Column(
