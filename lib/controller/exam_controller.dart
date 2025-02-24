@@ -4,6 +4,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutterweb_priv/model/add_question_model.dart';
 import 'package:flutterweb_priv/model/createexam_model.dart';
+import 'package:flutterweb_priv/model/get_quetiontype_model.dart';
+import 'package:flutterweb_priv/model/get_subject_model.dart';
+import 'package:flutterweb_priv/model/get_units_model.dart';
 import 'package:flutterweb_priv/model/item_model.dart';
 import 'package:flutterweb_priv/model/level_model.dart';
 import 'package:flutterweb_priv/repository/exam_repository.dart';
@@ -23,6 +26,7 @@ class ExamController extends GetxController{
     int? selectedItemsid;
     int? selectedUnitid;
     int? selectedSubjectid;
+   bool selectedtype=false;
      List<levelPayload> level =[];
      List<GetItemsPayload> item =[];
      List<String> levelList =[];
@@ -34,11 +38,17 @@ class ExamController extends GetxController{
      String? chooseUnit;
      List<String>? correct=[];
      int length=1;
-      List<TextEditingController> question=[];
-      List<TextEditingController> answer= [];
       String? isSelected;
-
-     void fetchlevel()async{
+    List<UnitsPayload> unitPayload =[];
+    List<SubjectPayload> subjectPayload =[];
+    List<QuestionTypePayload> questiontypePayload=[];
+    List<String> unitsList =[];
+    List<String>  subjectList =[];
+    List<String> questiontypelist=[];
+    String? selectedQuestionType;
+    int? Selectedid;
+    int? indexQuestion;
+      fetchlevel()async{
       update();
       await ExamRepository().getlevels(0).then((value){
             level=value.payload??[];
@@ -50,7 +60,7 @@ class ExamController extends GetxController{
       });
       update();
      }
-     void fetchItem()async{
+      fetchItem()async{
       update();
       await ExamRepository().getItems().then((value){
             item=value.payload??[];
@@ -64,43 +74,48 @@ class ExamController extends GetxController{
       update();
      }
 
-     List<String> unit=[
-      'الوحدةالاولى',
-      'الوحدةالثانية',
-      'الوحدةالثالثة',
-      'الوحدةالرابعة',
-      'الوحدةالخامسة',
-      'الوحدةالسادسة',
-      'الوحدةالسابعة',
-      'الوحدةالثامنة',
-      'الوحدةالتاسعة',
-      'الوحدةالعاشرة',
-    ];
 
-    List<String> subject=[
-      'الدرس الاول',
-      'الدرس الثاني',
-      'الدرس الثالث',
-      'الدرس الرابع',
-      'الدرس الخامسة',
-      'الدرس السادس',
-      'الدرس السابع',
-      'الدرس الثامن',
-      'الدرس التاسع',
-      'الدرس العاشر',
-      'الدرس الحادي عشر',
-      'الدرس الثاني عشر',
-      'الدرس الثالث عشر',
-      'الدرس الرابع عشر',
-      'الدرس الخامس عشر',
-    ];
+     fetchUnits()async{
+      update();
+      await ExamRepository().getUnits().then((value){
+        unitPayload=value.payload??[];
+        for (var element in unitPayload) {
+          unitsList.add(element.unitsName!);
+        }
+      });
+      update();
+    }
+    fetchSubjects()async{
+      update();
+      await ExamRepository().getSubjects().then((value){
+        subjectPayload=value.payload??[];
+        for (var element in subjectPayload) {
+          subjectList.add(element.subjectName!);
+        }
+      });
+      update();
+    }
 
+    fetchQuestionType()async{
+      update();
+      await ExamRepository().questionType().then((value){
+        questiontypePayload =value.payload??[];
+        for (var element in questiontypePayload) {
+          questiontypelist.add(element.questionTypeName!);
+        }
+      });
+      update();
+    }
 List<AddExamModel> addexam=[];
 List<exam> examlist=[];
+
    @override
   void onInit() {
    fetchlevel();
    fetchItem();
+   fetchSubjects();
+   fetchUnits();
+   fetchQuestionType();
     super.onInit();
   }
 

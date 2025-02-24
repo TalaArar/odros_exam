@@ -63,97 +63,124 @@ class _CreateExamViewState extends State<CreateExamView> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              controller.itemList.isEmpty?SizedBox():         CustomizeDropdownWidget(
-                                hint: Text(
-                                  "اختر المادة",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Theme.of(context).hintColor,
-                                  ),
-                                ),
-                                items: controller.itemList,
-                                onChange: (value) {
-                                  controller.selectedItemsValue = value;
-                                  for (var level in controller.item) {
-                                    if (controller.selectedItemsValue ==
-                                        level.itemName) {
-                                      controller.selectedItemsid = level.itemNo;
-                                    }
-                                  }
-                                  controller.update();
-                                },
-                                hintText: "اختر المادة",
-                                searchController: itemsEditingController,
-                                value: controller.selectedItemsValue??controller.item.first.itemName,
-
-                              ),
-                      controller.level.isEmpty?SizedBox():        CustomizeDropdownWidget(
-                                hint: Text(
-                                  'اختر الصف',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Theme.of(context).hintColor,
-                                  ),
-                                ),
-                                items: controller.levelList,
-                                onChange: (value) {
-                                  controller.selectedLevelValue = value;
-                                  for (var level in controller.level) {
-                                    if (controller.selectedLevelValue ==
-                                        level.levelName) {
-                                      controller.selectedLevelid =
-                                          level.levelSer;
-                                    }
-                                  }
-                                  controller.update();
-                                },
-                                hintText: "اختر الصف",
-                                searchController: levelEditingController,
-                                value: controller.selectedLevelValue??controller.level.first.levelName,
-
-                              ),
+                              controller.itemList.isEmpty
+                                  ? SizedBox()
+                                  : CustomizeDropdownWidget(
+                                      hint: Text(
+                                        "اختر المادة",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Theme.of(context).hintColor,
+                                        ),
+                                      ),
+                                      items: controller.itemList,
+                                      onChange: (value) {
+                                        controller.selectedItemsValue = value;
+                                        for (var level in controller.item) {
+                                          if (controller.selectedItemsValue ==
+                                              level.itemName) {
+                                            controller.selectedItemsid =
+                                                level.itemNo;
+                                          }
+                                        }
+                                        controller.update();
+                                      },
+                                      hintText: "اختر المادة",
+                                      searchController: itemsEditingController,
+                                      value: controller.selectedItemsValue ??
+                                          controller.item.first.itemName,
+                                    ),
+                              controller.level.isEmpty
+                                  ? SizedBox()
+                                  : CustomizeDropdownWidget(
+                                      hint: Text(
+                                        'اختر الصف',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Theme.of(context).hintColor,
+                                        ),
+                                      ),
+                                      items: controller.levelList,
+                                      onChange: (value) {
+                                        controller.selectedLevelValue = value;
+                                        for (var level in controller.level) {
+                                          if (controller.selectedLevelValue ==
+                                              level.levelName) {
+                                            controller.selectedLevelid =
+                                                level.levelSer;
+                                          }
+                                        }
+                                        controller.update();
+                                      },
+                                      hintText: "اختر الصف",
+                                      searchController: levelEditingController,
+                                      value: controller.selectedLevelValue ??
+                                          controller.level.first.levelName,
+                                    ),
                             ],
                           ),
                           Gap(20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              CustomizeDropdownWidget(
-                                hint: Text(
-                                  "اختر الدرس",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Theme.of(context).hintColor,
-                                  ),
-                                ),
-                                items: controller.subject,
-                                onChange: (value) {
-                                  controller.selectedSubjectValue = value;
-                                  controller.update();
-                                },
+                              controller.subjectList.isEmpty
+                                  ? SizedBox()
+                                  : CustomizeDropdownWidget(
+                                      hint: Text(
+                                        "اختر الدرس",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Theme.of(context).hintColor,
+                                        ),
+                                      ),
+                                      items: controller.subjectList,
+                                      onChange: (value) {
+                                        controller.selectedSubjectValue = value;
 
-                                hintText: "اختر الدرس",
-                                searchController: subjectEditingController,
-                                value: controller.selectedSubjectValue??controller.subject.first.toString(),
+                                        for (var sub in controller.subjectPayload) {
+                                          if (controller.selectedSubjectValue ==
+                                              sub.subjectName) {
+                                            controller.selectedSubjectid =
+                                                sub.subjectNo;
+                                          }
+                                        }
+                                        controller.update();
+                                      },
+                                      hintText: "اختر الدرس",
+                                      searchController:
+                                          subjectEditingController,
+                                      value: controller.selectedSubjectValue ??
+                                          controller.subjectList.first
+                                              .toString(),
+                                    ),
+                              controller.unitsList.isEmpty
+                                  ? SizedBox()
+                                  : CustomizeDropdownWidget(
+                                      hint: Text(
+                                        "اختر الوحدة",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Theme.of(context).hintColor,
+                                        ),
+                                      ),
+                                      items: controller.unitsList,
+                                      onChange: (value) {
+                                        controller.selectedUnitValue = value;
 
-                              ),
-                              CustomizeDropdownWidget(
-                                hint: Text(
-                                  "اختر الوحدة",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Theme.of(context).hintColor,
-                                  ),
-                                ),
-                                items: controller.unit,
-                                onChange: (value) {
-                                  controller.selectedUnitValue = value;
-                                  controller.update();
-                                },
-                                hintText: "اختر الوحدة",
-                                searchController: unitEditingController,
-                                value: controller.selectedUnitValue??controller.unit.first.toString(),
-                              ),
+                                        for (var uni in controller.unitPayload) {
+                                          if (controller.selectedUnitValue ==
+                                              uni.unitsName) {
+                                            controller.selectedUnitid =
+                                                uni.unitsNo;
+                                          }
+                                        }
+                                        controller.update();
+                                      },
+                                      hintText: "اختر الوحدة",
+                                      searchController: unitEditingController,
+                                      value: controller.selectedUnitValue ??
+                                          controller.unitsList.first
+                                              .toString()),
                             ],
                           ),
                           const Gap(20),
@@ -175,8 +202,7 @@ class _CreateExamViewState extends State<CreateExamView> {
                                     hintStyle: const TextStyle(
                                       color: Colors.black26,
                                     ),
-                                    hintTextDirection:
-                                    TextDirection.rtl,
+                                    hintTextDirection: TextDirection.rtl,
                                     contentPadding: const EdgeInsets.symmetric(
                                         horizontal: 10, vertical: 13),
                                     border: OutlineInputBorder(
@@ -213,7 +239,7 @@ class _CreateExamViewState extends State<CreateExamView> {
                                             borderSide: BorderSide(
                                                 color: Colors.grey.shade400),
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                                BorderRadius.circular(5)),
                                         hintText: 'اكتب السؤال',
                                         hintTextDirection: TextDirection.rtl,
                                         hintStyle: const TextStyle(
@@ -226,11 +252,64 @@ class _CreateExamViewState extends State<CreateExamView> {
                                             borderSide: BorderSide(
                                                 color: Colors.grey.shade400),
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                                BorderRadius.circular(5)),
                                       ),
                                     ),
                                   ),
                                 ),
+
+                                Align(
+                                    alignment: Alignment.topRight,
+                                    child: Text("مستوى السؤال")),
+
+                              Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: Container(
+
+                                  width: Get.width,
+                                  height: Get.height*0.07,
+                                  child:  ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: controller.questiontypelist.length,
+                                    itemBuilder: (context, index) {
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        highlightColor:Colors.transparent,
+                                        focusColor:Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        onTap: () {
+                                          controller.indexQuestion=index;
+                                          controller.update();
+                                          controller.selectedQuestionType=controller.questiontypelist[index];
+                                          for(var question in controller.questiontypePayload){
+                                            if(question.questionTypeName==controller.selectedQuestionType){
+                                              controller.Selectedid=question.questionTypeNo;
+                                            }
+                                          }
+                                          controller.update();
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15),
+                                          child: Container(
+                                            width: Get.width*0.2,
+                                            height: Get.height*0.1,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: controller.indexQuestion==index?Colors.green:Colors.black26,
+                                                )
+                                            ),
+                                            child: Center(child: Text(controller.questiontypelist[index].toString(),style: TextStyle(
+                                              color: Colors.black87,
+
+                                            ),)),
+                                          ),
+                                        ),
+                                      );
+                                    },),
+                                ),
+                              ),
+
                                 const Gap(10),
                                 Column(
                                     mainAxisAlignment:
@@ -433,7 +512,7 @@ class _CreateExamViewState extends State<CreateExamView> {
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                           ),
-                                          fixedSize: Size(Get.width * 0.4,
+                                          fixedSize: Size(Get.width * 0.3,
                                               Get.height * 0.05),
                                           backgroundColor: AppColors.darkBlue),
                                       child: const Text("عرض الاسئلة"),
@@ -447,7 +526,7 @@ class _CreateExamViewState extends State<CreateExamView> {
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                           ),
-                                          fixedSize: Size(Get.width * 0.4,
+                                          fixedSize: Size(Get.width * 0.3,
                                               Get.height * 0.05),
                                           backgroundColor: AppColors.blue),
                                       child: const Text("اضافة"),
@@ -463,7 +542,10 @@ class _CreateExamViewState extends State<CreateExamView> {
                                                     .text)));
                                         controller.update();
                                         Get.snackbar("تم اضافته بنجاح", "");
-                                    Get.snackbar(controller.examlist.length.toString(), "");
+                                        Get.snackbar(
+                                            controller.examlist.length
+                                                .toString(),
+                                            "");
                                         answer1Controller.clear();
                                         answer2Controller.clear();
                                         answer3Controller.clear();

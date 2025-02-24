@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class UnitsModel {
-  List<Payload>? payload;
+  List<UnitsPayload>? payload;
   bool? status;
   String? resultMessage;
   dynamic refNo;
@@ -18,7 +18,7 @@ class UnitsModel {
   String toRawJson() => json.encode(toJson());
 
   factory UnitsModel.fromJson(Map<String, dynamic> json) => UnitsModel(
-    payload: json["payload"] == null ? [] : List<Payload>.from(json["payload"]!.map((x) => Payload.fromJson(x))),
+    payload: json["payload"] == null ? [] : List<UnitsPayload>.from(json["payload"]!.map((x) => UnitsPayload.fromJson(x))),
     status: json["status"],
     resultMessage: json["resultMessage"],
     refNo: json["refNo"],
@@ -32,20 +32,20 @@ class UnitsModel {
   };
 }
 
-class Payload {
+class UnitsPayload {
   int? unitsNo;
   String? unitsName;
 
-  Payload({
+  UnitsPayload({
     this.unitsNo,
     this.unitsName,
   });
 
-  factory Payload.fromRawJson(String str) => Payload.fromJson(json.decode(str));
+  factory UnitsPayload.fromRawJson(String str) => UnitsPayload.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Payload.fromJson(Map<String, dynamic> json) => Payload(
+  factory UnitsPayload.fromJson(Map<String, dynamic> json) => UnitsPayload(
     unitsNo: json["UNITS_NO"],
     unitsName: json["UNITS_NAME"],
   );

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class QuestionTypeModel {
-  List<Payload>? payload;
+  List<QuestionTypePayload>? payload;
   bool? status;
   String? resultMessage;
   dynamic refNo;
@@ -18,7 +18,7 @@ class QuestionTypeModel {
   String toRawJson() => json.encode(toJson());
 
   factory QuestionTypeModel.fromJson(Map<String, dynamic> json) => QuestionTypeModel(
-    payload: json["payload"] == null ? [] : List<Payload>.from(json["payload"]!.map((x) => Payload.fromJson(x))),
+    payload: json["payload"] == null ? [] : List<QuestionTypePayload>.from(json["payload"]!.map((x) => QuestionTypePayload.fromJson(x))),
     status: json["status"],
     resultMessage: json["resultMessage"],
     refNo: json["refNo"],
@@ -32,20 +32,20 @@ class QuestionTypeModel {
   };
 }
 
-class Payload {
+class QuestionTypePayload {
   int? questionTypeNo;
   String? questionTypeName;
 
-  Payload({
+  QuestionTypePayload({
     this.questionTypeNo,
     this.questionTypeName,
   });
 
-  factory Payload.fromRawJson(String str) => Payload.fromJson(json.decode(str));
+  factory QuestionTypePayload.fromRawJson(String str) => QuestionTypePayload.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Payload.fromJson(Map<String, dynamic> json) => Payload(
+  factory QuestionTypePayload.fromJson(Map<String, dynamic> json) => QuestionTypePayload(
     questionTypeNo: json["QUESTION_TYPE_NO"],
     questionTypeName: json["QUESTION_TYPE_NAME"],
   );

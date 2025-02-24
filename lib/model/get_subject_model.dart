@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class SubjectModel {
-  List<Payload>? payload;
+  List<SubjectPayload>? payload;
   bool? status;
   String? resultMessage;
   dynamic refNo;
@@ -18,7 +18,7 @@ class SubjectModel {
   String toRawJson() => json.encode(toJson());
 
   factory SubjectModel.fromJson(Map<String, dynamic> json) => SubjectModel(
-    payload: json["payload"] == null ? [] : List<Payload>.from(json["payload"]!.map((x) => Payload.fromJson(x))),
+    payload: json["payload"] == null ? [] : List<SubjectPayload>.from(json["payload"]!.map((x) => SubjectPayload.fromJson(x))),
     status: json["status"],
     resultMessage: json["resultMessage"],
     refNo: json["refNo"],
@@ -32,20 +32,20 @@ class SubjectModel {
   };
 }
 
-class Payload {
+class SubjectPayload {
   int? subjectNo;
   String? subjectName;
 
-  Payload({
+  SubjectPayload({
     this.subjectNo,
     this.subjectName,
   });
 
-  factory Payload.fromRawJson(String str) => Payload.fromJson(json.decode(str));
+  factory SubjectPayload.fromRawJson(String str) => SubjectPayload.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Payload.fromJson(Map<String, dynamic> json) => Payload(
+  factory SubjectPayload.fromJson(Map<String, dynamic> json) => SubjectPayload(
     subjectNo: json["SUBJECT_NO"],
     subjectName: json["SUBJECT_NAME"],
   );

@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutterweb_priv/model/createexam_model.dart';
 import 'package:flutterweb_priv/model/educationtype_model.dart';
 import 'package:flutterweb_priv/model/exam_category_model.dart';
+import 'package:flutterweb_priv/model/get_quetiontype_model.dart';
+import 'package:flutterweb_priv/model/get_subject_model.dart';
+import 'package:flutterweb_priv/model/get_units_model.dart';
 import 'package:flutterweb_priv/model/item_model.dart';
 import 'package:flutterweb_priv/model/level_model.dart';
 import 'package:http/http.dart' as http;
@@ -120,6 +123,56 @@ class ExamRepository{
     else {
     print(response.reasonPhrase);
     return GetExamCategoryModel.fromJson(json.decode(res));
+
+    }
+
+  }
+
+
+ Future<UnitsModel> getUnits()async{
+    var request = http.Request('GET', Uri.parse('${ApiUrls.api}/GetUnits?lang=1'));
+
+
+    http.StreamedResponse response = await request.send();
+    String res=await response.stream.bytesToString();
+    if (response.statusCode == 200) {
+  return UnitsModel.fromJson(json.decode(res));
+    }
+    else {
+    print(response.reasonPhrase);
+    return UnitsModel.fromJson(json.decode(res));
+
+    }
+
+  }
+
+  Future<SubjectModel>getSubjects()async{
+    var request = http.Request('GET', Uri.parse('${ApiUrls.api}/GetSubjects?lang=1'));
+    http.StreamedResponse response = await request.send();
+    String res=await response.stream.bytesToString();
+    if (response.statusCode == 200) {
+  return SubjectModel.fromJson(json.decode(res));
+    }
+    else {
+    print(response.reasonPhrase);
+    return SubjectModel.fromJson(json.decode(res));
+
+    }
+
+  }
+
+  Future<QuestionTypeModel> questionType()async{
+    var request = http.Request('GET', Uri.parse('${ApiUrls.api}/GetQuestionType?lang=1'));
+
+
+    http.StreamedResponse response = await request.send();
+     String res=await response.stream.bytesToString();
+    if (response.statusCode == 200) {
+   return QuestionTypeModel.fromJson(json.decode(res));
+    }
+    else {
+    print(response.reasonPhrase);
+    return QuestionTypeModel.fromJson(json.decode(res));
 
     }
 
