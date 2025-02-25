@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutterweb_priv/model/add_question_model.dart';
 import 'package:flutterweb_priv/model/createexam_model.dart';
 import 'package:flutterweb_priv/model/educationtype_model.dart';
 import 'package:flutterweb_priv/model/exam_category_model.dart';
@@ -14,40 +15,27 @@ import '../helper/apiUrl.dart';
 
 
 class ExamRepository{
-  Future<CreateExamModel> CreateExam()async{
+  Future<CreateExamModel> createExam(List<AddExamModel> body)async{
     var headers = {
-      'Content-Type': 'application/json'
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'Accept': '*/*'
     };
     var request = http.Request('POST', Uri.parse('${ApiUrls.api}/CreateExam'));
-    request.body = json.encode(  
-[
-  {
-
-    "LEVEL_SER": 0,
-    "ITEM_SER": 0,
-    "EXAM_QUESTION_TEXT": "string",
-    "ANSWER_ONE": "string",
-    "ANSWER_TWO": "string",
-    "ANSWER_THREE": "string",
-    "ANSWER_FOUR": "string",
-    "ANSWER_IS_CORRECT": "string"
-  }
-]
-
-);
+    request.body = json.encode(body);
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
     String res=await response.stream.bytesToString();
+    print(body.toList().toString());
     if (response.statusCode == 200) {
-     return CreateExamModel.fromJson(json.decode(res));
+      return CreateExamModel.fromJson(json.decode(res));
     }
     else {
-    print(response.reasonPhrase);
-    return CreateExamModel.fromJson(json.decode(res));
+      print(response.reasonPhrase);
+      return CreateExamModel.fromJson(json.decode(res));
 
     }
-
 
   }
 
@@ -158,7 +146,6 @@ class ExamRepository{
     return SubjectModel.fromJson(json.decode(res));
 
     }
-
   }
 
   Future<QuestionTypeModel> questionType()async{

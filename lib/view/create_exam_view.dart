@@ -74,7 +74,9 @@ class _CreateExamViewState extends State<CreateExamView> {
                                         ),
                                       ),
                                       items: controller.itemList,
-                                      onChange: (value) {
+                                      onChange:controller.selectedItemsValue!=null? null
+
+                    : (value) {
                                         controller.selectedItemsValue = value;
                                         for (var level in controller.item) {
                                           if (controller.selectedItemsValue ==
@@ -101,7 +103,7 @@ class _CreateExamViewState extends State<CreateExamView> {
                                         ),
                                       ),
                                       items: controller.levelList,
-                                      onChange: (value) {
+                                      onChange:controller.selectedLevelValue!=null?null: (value) {
                                         controller.selectedLevelValue = value;
                                         for (var level in controller.level) {
                                           if (controller.selectedLevelValue ==
@@ -134,10 +136,11 @@ class _CreateExamViewState extends State<CreateExamView> {
                                         ),
                                       ),
                                       items: controller.subjectList,
-                                      onChange: (value) {
+                                      onChange:controller.selectedSubjectValue!=null?null: (value) {
                                         controller.selectedSubjectValue = value;
 
-                                        for (var sub in controller.subjectPayload) {
+                                        for (var sub
+                                            in controller.subjectPayload) {
                                           if (controller.selectedSubjectValue ==
                                               sub.subjectName) {
                                             controller.selectedSubjectid =
@@ -164,10 +167,11 @@ class _CreateExamViewState extends State<CreateExamView> {
                                         ),
                                       ),
                                       items: controller.unitsList,
-                                      onChange: (value) {
+                                      onChange:controller.selectedUnitValue!=null?null: (value) {
                                         controller.selectedUnitValue = value;
 
-                                        for (var uni in controller.unitPayload) {
+                                        for (var uni
+                                            in controller.unitPayload) {
                                           if (controller.selectedUnitValue ==
                                               uni.unitsName) {
                                             controller.selectedUnitid =
@@ -257,59 +261,71 @@ class _CreateExamViewState extends State<CreateExamView> {
                                     ),
                                   ),
                                 ),
-
                                 Align(
                                     alignment: Alignment.topRight,
                                     child: Text("مستوى السؤال")),
-
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: Container(
-
-                                  width: Get.width,
-                                  height: Get.height*0.07,
-                                  child:  ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: controller.questiontypelist.length,
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        highlightColor:Colors.transparent,
-                                        focusColor:Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        onTap: () {
-                                          controller.indexQuestion=index;
-                                          controller.update();
-                                          controller.selectedQuestionType=controller.questiontypelist[index];
-                                          for(var question in controller.questiontypePayload){
-                                            if(question.questionTypeName==controller.selectedQuestionType){
-                                              controller.Selectedid=question.questionTypeNo;
+                                Directionality(
+                                  textDirection: TextDirection.rtl,
+                                  child: Container(
+                                    width: Get.width,
+                                    height: Get.height * 0.07,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount:
+                                          controller.questiontypelist.length,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          splashColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          onTap: () {
+                                            controller.indexQuestion = index;
+                                            controller.update();
+                                            controller.selectedQuestionType =
+                                                controller
+                                                    .questiontypelist[index];
+                                            for (var question in controller
+                                                .questiontypePayload) {
+                                              if (question.questionTypeName ==
+                                                  controller
+                                                      .selectedQuestionType) {
+                                                controller.Selectedid =
+                                                    question.questionTypeNo;
+                                              }
                                             }
-                                          }
-                                          controller.update();
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15),
-                                          child: Container(
-                                            width: Get.width*0.2,
-                                            height: Get.height*0.1,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: controller.indexQuestion==index?Colors.green:Colors.black26,
-                                                )
+                                            controller.update();
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15),
+                                            child: Container(
+                                              width: Get.width * 0.2,
+                                              height: Get.height * 0.1,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                color:
+                                                    controller.indexQuestion ==
+                                                            index
+                                                        ? Colors.green
+                                                        : Colors.black26,
+                                              )),
+                                              child: Center(
+                                                  child: Text(
+                                                controller
+                                                    .questiontypelist[index]
+                                                    .toString(),
+                                                style: TextStyle(
+                                                  color: Colors.black87,
+                                                ),
+                                              )),
                                             ),
-                                            child: Center(child: Text(controller.questiontypelist[index].toString(),style: TextStyle(
-                                              color: Colors.black87,
-
-                                            ),)),
                                           ),
-                                        ),
-                                      );
-                                    },),
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
-
                                 const Gap(10),
                                 Column(
                                     mainAxisAlignment:
@@ -531,15 +547,36 @@ class _CreateExamViewState extends State<CreateExamView> {
                                           backgroundColor: AppColors.blue),
                                       child: const Text("اضافة"),
                                       onPressed: () {
-                                        controller.examlist.add(exam(
-                                            questionController.text,
-                                            answer(
-                                                answer1Controller.text,
-                                                answer2Controller.text,
-                                                answer3Controller.text,
-                                                answer4Controller.text,
-                                                answerIsCorrectController
-                                                    .text)));
+                                        controller.addexam.add(AddExamModel(
+                                            answerFour: answer4Controller.text,
+                                            answerThree: answer3Controller.text,
+                                            answerTwo: answer2Controller.text,
+                                            answerOne: answer1Controller.text,
+                                            answerIsCorrect:
+                                                answerIsCorrectController.text,
+                                            itemSer: controller.selectedItemsid,
+                                            levelSer:
+                                                controller.selectedLevelid,
+                                            itemName:
+                                                controller.selectedItemsValue,
+                                            levelName:
+                                                controller.selectedLevelValue,
+                                            subjectSer:
+                                                controller.selectedSubjectid,
+                                            subjectName:
+                                                controller.selectedSubjectValue,
+                                            unitName:
+                                                controller.selectedUnitValue,
+                                            unitSer: controller.selectedUnitid,
+                                            questionTypeSer:
+                                                controller.Selectedid,
+                                            questionTypeName:
+                                                controller.selectedQuestionType,
+                                            examQuestionText:
+                                                questionController.text,
+                                            subjectTitle:
+                                                subjectNameController.text));
+
                                         controller.update();
                                         Get.snackbar("تم اضافته بنجاح", "");
                                         Get.snackbar(
@@ -552,7 +589,7 @@ class _CreateExamViewState extends State<CreateExamView> {
                                         answer4Controller.clear();
                                         answerIsCorrectController.clear();
                                         questionController.clear();
-                                        subjectNameController.clear();
+                                        // subjectNameController.clear();
                                         controller.update();
                                       },
                                     ),
