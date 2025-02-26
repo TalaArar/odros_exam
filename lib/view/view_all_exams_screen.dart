@@ -87,14 +87,14 @@ class _ViewAllExamsScreenState extends State<ViewAllExamsScreen> {
                       fixedSize: Size(Get.width * 0.4, Get.height * 0.05),
                       backgroundColor: AppColors.blue),
                   onPressed: () async {
-                    log(controller.addexam.toList().toString());
+
                     await ExamRepository().createExam(controller.addexam).then(
                       (value) {
                         if (value.status == true) {
-                          Get.snackbar(value.status.toString(),
-                              value.status.toString());
+                          Get.snackbar("تم اضافته بنجاح",
+                            "");
                         } else {
-                          Get.snackbar(value.status.toString(),
+                          Get.snackbar("فشل  ",
                               value.status.toString());
                         }
                       },

@@ -15,19 +15,19 @@ import '../helper/apiUrl.dart';
 
 
 class ExamRepository{
-  Future<CreateExamModel> createExam(List<AddExamModel> body)async{
+  Future<CreateExamModel> createExam(List<AddExamModel>body)async{
     var headers = {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
       'Accept': '*/*'
     };
     var request = http.Request('POST', Uri.parse('${ApiUrls.api}/CreateExam'));
-    request.body = json.encode(body);
+    request.body = json.encode(body.map((e) => e.toJson()).toList());
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
     String res=await response.stream.bytesToString();
-    print(body.toList().toString());
+    print(body.map((e) => e.toJson()).toList());
     if (response.statusCode == 200) {
       return CreateExamModel.fromJson(json.decode(res));
     }
