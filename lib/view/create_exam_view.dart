@@ -56,7 +56,7 @@ class _CreateExamViewState extends State<CreateExamView> {
                           Text(
                             'انشاء امتحان',
                             style: TextStyle(
-                                fontSize: Get.width * 0.05,
+                                fontSize: Get.width * 0.03,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.darkBlue),
                           ),
