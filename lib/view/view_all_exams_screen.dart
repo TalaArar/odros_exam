@@ -111,7 +111,7 @@ class _ViewAllExamsScreenState extends State<ViewAllExamsScreen> {
                       fixedSize: Size(Get.width * 0.4, Get.height * 0.05),
                       backgroundColor: AppColors.blue),
                   onPressed: () async {
-                    //   levelser,itemser,subjectser,unitser,levelname,itemname,unitname,subjectname,odrosexam
+                    print(controller.answerexam.toList().toString());
                     await ExamRepository()
                         .createExam(
                             controller.selectedLevelid,
@@ -127,7 +127,7 @@ class _ViewAllExamsScreenState extends State<ViewAllExamsScreen> {
                       (value) {
                         if (value.status == true) {
                           Get.snackbar(value.resultMessage.toString(), "");
-                          Get.to(const CreateExamView());
+                          // Get.to(const CreateExamView());
                         } else {
                           Get.snackbar("فشل", value.status.toString());
                         }
