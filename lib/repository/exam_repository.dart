@@ -15,19 +15,29 @@ import '../helper/apiUrl.dart';
 
 
 class ExamRepository{
-  Future<CreateExamModel> createExam(List<AddExamModel>body)async{
+  Future<CreateExamModel> createExam(levelser,itemser,subjectser,unitser,levelname,itemname,unitname,subjectname,odrosexam)async{
     var headers = {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
       'Accept': '*/*'
     };
     var request = http.Request('POST', Uri.parse('${ApiUrls.api}/CreateExam'));
-    request.body = json.encode(body.map((e) => e.toJson()).toList());
+    request.body = json.encode({
+      "LEVEL_SER": levelser,
+      "ITEM_SER": itemser,
+      "LEVEL_NAME": "$levelname",
+      "ITEM_NAME": "$itemname",
+      "UNIT_SER": unitser,
+      "UNIT_NAME": "$unitname",
+      "SUBJECT_SER": subjectser,
+      "SUBJECT_NAME": "$subjectname",
+      "ODROS_EXAMS_ANSWERs":odrosexam
+    });
+
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
     String res=await response.stream.bytesToString();
-    print(body.map((e) => e.toJson()).toList());
     if (response.statusCode == 200) {
       return CreateExamModel.fromJson(json.decode(res));
     }
@@ -164,4 +174,53 @@ class ExamRepository{
     }
 
   }
+}
+
+
+class AnswerExamModel {
+  String? answerOne;
+  String? answerTwo;
+  String? answerThree;
+  String? answerFour;
+  String? answerIsCorrect;
+  String? examQuestionText;
+  String? subjectTitle;
+  int? questionTypeSer;
+  String? questionTypeName;
+
+  AnswerExamModel({
+    this.answerOne,
+    this.answerTwo,
+    this.answerThree,
+    this.answerFour,
+    this.answerIsCorrect,
+    this.examQuestionText,
+    this.subjectTitle,
+    this.questionTypeSer,
+    this.questionTypeName,
+  });
+
+  factory AnswerExamModel.fromJson(Map<String, dynamic> json) => AnswerExamModel(
+    answerOne: json["ANSWER_ONE"],
+    answerTwo: json["ANSWER_TWO"],
+    answerThree: json["ANSWER_THREE"],
+    answerFour: json["ANSWER_FOUR"],
+    answerIsCorrect: json["ANSWER_IS_CORRECT"],
+    examQuestionText: json["EXAM_QUESTION_TEXT"],
+    subjectTitle: json["SUBJECT_TITLE"],
+    questionTypeSer: json["QUESTION_TYPE_SER"],
+    questionTypeName: json["QUESTION_TYPE_NAME"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "ANSWER_ONE": answerOne,
+    "ANSWER_TWO": answerTwo,
+    "ANSWER_THREE": answerThree,
+    "ANSWER_FOUR": answerFour,
+    "ANSWER_IS_CORRECT": answerIsCorrect,
+    "EXAM_QUESTION_TEXT": examQuestionText,
+    "SUBJECT_TITLE": subjectTitle,
+    "QUESTION_TYPE_SER": questionTypeSer,
+    "QUESTION_TYPE_NAME": questionTypeName,
+  };
 }

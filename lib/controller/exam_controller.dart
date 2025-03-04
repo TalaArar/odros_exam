@@ -48,6 +48,7 @@ class ExamController extends GetxController{
     String? selectedQuestionType;
     int? Selectedid;
     int? indexQuestion;
+    List<AnswerExamModel> answerexam=[];
       fetchlevel()async{
       update();
       await ExamRepository().getlevels(0).then((value){
@@ -106,7 +107,6 @@ class ExamController extends GetxController{
       });
       update();
     }
-List<AddExamModel> addexam=[];
 List<exam> examlist=[];
 
    @override

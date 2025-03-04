@@ -10,6 +10,8 @@ import 'package:flutterweb_priv/view/view_all_exams_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
+import '../repository/exam_repository.dart' show AnswerExamModel;
+
 class CreateExamView extends StatefulWidget {
   const CreateExamView({super.key});
 
@@ -74,19 +76,23 @@ class _CreateExamViewState extends State<CreateExamView> {
                                         ),
                                       ),
                                       items: controller.itemList,
-                                      onChange:controller.selectedItemsValue!=null? null
-
-                    : (value) {
-                                        controller.selectedItemsValue = value;
-                                        for (var level in controller.item) {
-                                          if (controller.selectedItemsValue ==
-                                              level.itemName) {
-                                            controller.selectedItemsid =
-                                                level.itemNo;
-                                          }
-                                        }
-                                        controller.update();
-                                      },
+                                      onChange: controller.selectedItemsValue !=
+                                              null
+                                          ? null
+                                          : (value) {
+                                              controller.selectedItemsValue =
+                                                  value;
+                                              for (var level
+                                                  in controller.item) {
+                                                if (controller
+                                                        .selectedItemsValue ==
+                                                    level.itemName) {
+                                                  controller.selectedItemsid =
+                                                      level.itemNo;
+                                                }
+                                              }
+                                              controller.update();
+                                            },
                                       hintText: "اختر المادة",
                                       searchController: itemsEditingController,
                                       value: controller.selectedItemsValue ??
@@ -103,17 +109,23 @@ class _CreateExamViewState extends State<CreateExamView> {
                                         ),
                                       ),
                                       items: controller.levelList,
-                                      onChange:controller.selectedLevelValue!=null?null: (value) {
-                                        controller.selectedLevelValue = value;
-                                        for (var level in controller.level) {
-                                          if (controller.selectedLevelValue ==
-                                              level.levelName) {
-                                            controller.selectedLevelid =
-                                                level.levelSer;
-                                          }
-                                        }
-                                        controller.update();
-                                      },
+                                      onChange: controller.selectedLevelValue !=
+                                              null
+                                          ? null
+                                          : (value) {
+                                              controller.selectedLevelValue =
+                                                  value;
+                                              for (var level
+                                                  in controller.level) {
+                                                if (controller
+                                                        .selectedLevelValue ==
+                                                    level.levelName) {
+                                                  controller.selectedLevelid =
+                                                      level.levelSer;
+                                                }
+                                              }
+                                              controller.update();
+                                            },
                                       hintText: "اختر الصف",
                                       searchController: levelEditingController,
                                       value: controller.selectedLevelValue ??
@@ -136,19 +148,25 @@ class _CreateExamViewState extends State<CreateExamView> {
                                         ),
                                       ),
                                       items: controller.subjectList,
-                                      onChange:controller.selectedSubjectValue!=null?null: (value) {
-                                        controller.selectedSubjectValue = value;
+                                      onChange: controller
+                                                  .selectedSubjectValue !=
+                                              null
+                                          ? null
+                                          : (value) {
+                                              controller.selectedSubjectValue =
+                                                  value;
 
-                                        for (var sub
-                                            in controller.subjectPayload) {
-                                          if (controller.selectedSubjectValue ==
-                                              sub.subjectName) {
-                                            controller.selectedSubjectid =
-                                                sub.subjectNo;
-                                          }
-                                        }
-                                        controller.update();
-                                      },
+                                              for (var sub in controller
+                                                  .subjectPayload) {
+                                                if (controller
+                                                        .selectedSubjectValue ==
+                                                    sub.subjectName) {
+                                                  controller.selectedSubjectid =
+                                                      sub.subjectNo;
+                                                }
+                                              }
+                                              controller.update();
+                                            },
                                       hintText: "اختر الدرس",
                                       searchController:
                                           subjectEditingController,
@@ -167,19 +185,24 @@ class _CreateExamViewState extends State<CreateExamView> {
                                         ),
                                       ),
                                       items: controller.unitsList,
-                                      onChange:controller.selectedUnitValue!=null?null: (value) {
-                                        controller.selectedUnitValue = value;
+                                      onChange: controller.selectedUnitValue !=
+                                              null
+                                          ? null
+                                          : (value) {
+                                              controller.selectedUnitValue =
+                                                  value;
 
-                                        for (var uni
-                                            in controller.unitPayload) {
-                                          if (controller.selectedUnitValue ==
-                                              uni.unitsName) {
-                                            controller.selectedUnitid =
-                                                uni.unitsNo;
-                                          }
-                                        }
-                                        controller.update();
-                                      },
+                                              for (var uni
+                                                  in controller.unitPayload) {
+                                                if (controller
+                                                        .selectedUnitValue ==
+                                                    uni.unitsName) {
+                                                  controller.selectedUnitid =
+                                                      uni.unitsNo;
+                                                }
+                                              }
+                                              controller.update();
+                                            },
                                       hintText: "اختر الوحدة",
                                       searchController: unitEditingController,
                                       value: controller.selectedUnitValue ??
@@ -547,42 +570,30 @@ class _CreateExamViewState extends State<CreateExamView> {
                                           backgroundColor: AppColors.blue),
                                       child: const Text("اضافة"),
                                       onPressed: () {
-                                        controller.addexam.add(AddExamModel(
-                                            answerFour: answer4Controller.text,
-                                            answerThree: answer3Controller.text,
-                                            answerTwo: answer2Controller.text,
-                                            answerOne: answer1Controller.text,
-                                            answerIsCorrect:
-                                                answerIsCorrectController.text,
-                                            itemSer: controller.selectedItemsid,
-                                            levelSer:
-                                                controller.selectedLevelid,
-                                            itemName:
-                                                controller.selectedItemsValue,
-                                            levelName:
-                                                controller.selectedLevelValue,
-                                            subjectSer:
-                                                controller.selectedSubjectid,
-                                            subjectName:
-                                                controller.selectedSubjectValue,
-                                            unitName:
-                                                controller.selectedUnitValue,
-                                            unitSer: controller.selectedUnitid,
-                                            questionTypeSer:
-                                                controller.Selectedid,
-                                            questionTypeName:
-                                                controller.selectedQuestionType,
-                                            examQuestionText:
-                                                questionController.text,
-                                            subjectTitle:
-                                                subjectNameController.text));
+                                        controller.answerexam.add(
+                                            AnswerExamModel(
+                                                subjectTitle:
+                                                    subjectNameController.text,
+                                                examQuestionText:
+                                                    questionController.text,
+                                                questionTypeName: controller
+                                                    .selectedQuestionType,
+                                                questionTypeSer:
+                                                    controller.Selectedid,
+                                                answerOne:
+                                                    answer1Controller.text,
+                                                answerTwo:
+                                                    answer2Controller.text,
+                                                answerThree:
+                                                    answer3Controller.text,
+                                                answerFour:
+                                                    answer4Controller.text,
+                                                answerIsCorrect:
+                                                    answerIsCorrectController
+                                                        .text));
 
                                         controller.update();
                                         Get.snackbar("تم اضافته بنجاح", "");
-                                        Get.snackbar(
-                                            controller.examlist.length
-                                                .toString(),
-                                            "");
                                         answer1Controller.clear();
                                         answer2Controller.clear();
                                         answer3Controller.clear();
